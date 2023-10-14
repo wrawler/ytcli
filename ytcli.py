@@ -23,7 +23,7 @@ config = None
 def initiYtcli():
     with open("config.json","r") as configFile:
         config = json.load(configFile)
-        
+
     api_key = input("Enter your YouTube API key: ")
     download_path = input("Enter custom download path (default = downloads directory in this folder)") or os.path.join(os.getcwd(), "downloads")
     os.makedirs(download_path, exist_ok=True)
