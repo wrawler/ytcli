@@ -2,10 +2,7 @@ import subprocess
 import json
 import os
 
-# List of required modules
 required_modules = ['argparse', 'googleapiclient', 'pytube']
-
-# Function to install modules
 def install_required_modules():
     for module in required_modules:
         try:
@@ -14,6 +11,16 @@ def install_required_modules():
             
         except subprocess.CalledProcessError:
             print(f'Failed to install {module}')
+
+def load_config():
+    try:
+        with open("config.json", "r") as f:
+            config = json.load(f)
+        return config
+
+    except FileNotFoundError:
+        print(f"Configuration file config.json not found.")
+        return {}
 
 def initiYtcli():
     with open("config.json","r") as configFile:
@@ -29,6 +36,9 @@ def initiYtcli():
     
     with open('config.json', 'w') as file:
         json.dump(config, file, indent=4)
-        
+
 if __name__ == "__main__":
     install_required_modules()
+    config = load_config()
+    if config.get("FIRST_RUN_COMPLETED") == "False":
+        initiYtcli()

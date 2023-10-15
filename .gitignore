@@ -2,3 +2,4 @@ downloads
 .vs
 .vscode
 config.json
+__pycache__
