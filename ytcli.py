@@ -5,18 +5,20 @@ import argparse
 from tabulate import tabulate
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from google.oauth2.credentials import Credentials
 from pytube import YouTube
+from pathvalidate import sanitize_filename
 
 from setup import load_config
 from multiplex import combineAudioVideo
-from pathvalidate import sanitize_filename
 
+credentials = Credentials.from_authorized_user_file("credentials.json")
 config = load_config()
 def searchYoutube(searchTerm,searchType,maxResults):
     youtube = build(
         serviceName     =   config.get("API_SERVICE_NAME"),
         version         =   config.get("API_VERSION"),
-        developerKey    =   config.get("API_KEY")
+        credentials     =   credentials
     )
 
     search_response = (
@@ -24,7 +26,7 @@ def searchYoutube(searchTerm,searchType,maxResults):
         .list(type=searchType,q=searchTerm, part="id,snippet", maxResults = maxResults)\
         .execute()
     )
-    
+
     resultSrno = 1
     for search_result in search_response.get("items", []):
         if searchType in ["video","channel","playlist"]:
@@ -94,6 +96,7 @@ def handleUserInput(user_input):
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest='action',title='actions')
     
+    # Subparser for 'search' action
     search_parser = subparsers.add_parser('search', help="Search YouTube")
     search_parser.add_argument('--term',        default = 'hello',  help="Search term")
     search_parser.add_argument('--searchtype',  default = 'video',  help="Type of item to search (video/channel/playlists)")
