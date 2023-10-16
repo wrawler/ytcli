@@ -63,12 +63,12 @@ Ytcli is a command-line based application which helps to perform various YouTube
 # Usage
 
    1) Open the terminal in the directory and run following command to enter the interactive terminal.
-   ```
-   python ytcli.py
-   ```
-   or just open the executable present in dist/ytcli directory if you had created the executable.
+      ```
+      python ytcli.py
+      ```
+      or just open the executable present in dist/ytcli directory if you had created the executable.
 
-   **NOTE: ** You can create a shortcut to this executable anywhere on your system. This would allow usage of this application without having to enter install directory. 
+      **NOTE:** You can create a shortcut to this executable anywhere on your system. This would allow usage of this application without having to enter install directory. 
 
    2) Run help to see the available commands along with examples
 
@@ -77,6 +77,6 @@ Ytcli is a command-line based application which helps to perform various YouTube
 
 # Future Goals
 
-- Support of channel info querries
-- View videos in a playlist
-- Multiple searches with new/next results
+   - Support of channel info querries
+   - View videos in a playlist
+   - Multiple searches with new/next results
